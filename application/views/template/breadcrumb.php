@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-      <i class="fa fa-home"></i> &nbsp;
+      <i class="fa fa-dashboard"></i> &nbsp;
       <?php 
         $stopbreadcrumb=0;
         foreach ($breadcrumb as $label => $link) {

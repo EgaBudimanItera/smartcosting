@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Berandaadmin extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,7 +21,8 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$data=array(
-		  'page'=>'contoh'
+		  'page'=>'contoh',
+		  'link'=>'beranda'
 		);
 		$this->load->view('template/header',$data);
 		$this->load->view('template/sidebaradmin');
