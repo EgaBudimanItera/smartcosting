@@ -8,14 +8,14 @@ class Mproduk extends CI_Model {
         return true;
     }
 
-    function ubah_produk($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
+    function ubah_produk($kode, $data){       
+        $this->db->where('idproduk', $kode);
         $this->db->update('produk', $data); 
         return true;
     }
 
-    function hapus_produk($param_kode, $kode){
-        $this->db->delete('produk', array($param_kode => $kode)); 
+    function hapus_produk($kode){
+        $this->db->delete('produk', array('idproduk' => $kode)); 
         return true;
     }
 
@@ -26,16 +26,16 @@ class Mproduk extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
-    function ambil_produk($param_kode, $kode){
+    function ambil_produk($kode){
         $this->db->select('*');
         $this->db->from('produk');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idproduk',$kode);
         return $query=$this->db->get();
     }
 
     function kode_produk(){
     	//N201700001
-    	$this->db->select('Right(idproduk,5) as kode',false);
+    	$this->db->select('Right(idproduk,4) as kode',false);
     	
     	$this->db->order_by('idproduk','desc');
     	$this->db->limit(1);
@@ -48,7 +48,7 @@ class Mproduk extends CI_Model {
             $kode = 1;
 
         }
-        $kodemax = str_pad($kode,5,"0",STR_PAD_LEFT);
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
         $kodejadi  = "P".$kodemax;
         return $kodejadi;
    	}

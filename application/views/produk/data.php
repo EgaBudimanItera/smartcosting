@@ -28,8 +28,9 @@
               <div class="widget-body">
                 <a href="<?=base_url()?>produk/formtambah" class="btn btn-danger">Tambah Data Produk</a>
               </div>  
-              
-              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+            </div>
+            <div class="box-body">
+             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div> 
             </div>
             <div class="box-body">
                 <table id="example2" class="table table-bordered table-striped">

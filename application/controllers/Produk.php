@@ -35,6 +35,7 @@ class Produk extends CI_Controller {
                 'Data produk' => base_url() . 'produk',
                 'Tambah Data' =>base_url(). 'produk/formtambah'
             ),
+            'idproduk'=>$this->Mproduk->kode_produk(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -52,7 +53,7 @@ class Produk extends CI_Controller {
                 'Data produk' => base_url() . 'produk',
                 'Edit Data' =>base_url(). 'produk/formedit'
             ),
-            'list'=>$this->Mproduk->ambil($id_produk)->row(),
+            'list'=>$this->Mproduk->ambil_produk($id_produk)->row(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -61,11 +62,15 @@ class Produk extends CI_Controller {
     }
 
     public function prosessimpan(){
-      $nMproduk=$this->input->post('nMproduk',true);
+      $idproduk=$this->Mproduk->kode_produk();
+      $namaproduk=$this->input->post('namaproduk',true);
+      $satuan=$this->input->post('satuan',true);
       $data=array(
-        'nMproduk'=>$nMproduk,
+        'idproduk'=>$idproduk,
+        'namaproduk'=>$namaproduk,
+        'satuan'=>$satuan,
       );
-      $simpan = $this->Mproduk->simpan_data($data);
+      $simpan = $this->Mproduk->simpan_produk($data);
       if($simpan){
             $this->session->set_flashdata(
             'msg', 
@@ -82,12 +87,14 @@ class Produk extends CI_Controller {
     }
 
     public function prosesedit(){
-       $id_produk=$this->input->post('id_produk',true);
-       $nMproduk=$this->input->post('nMproduk2',true);
+       $idproduk=$this->input->post('idproduk',true);
+       $namaproduk=$this->input->post('namaproduk',true);
+       $satuan=$this->input->post('satuan',true);
        $data=array(
-         'nMproduk'=>$nMproduk,
+        'namaproduk'=>$namaproduk,
+        'satuan'=>$satuan,
        ); 
-       $edit= $this->Mproduk->update('id_produk',$id_produk,$data);  
+       $edit= $this->Mproduk->ubah_produk($idproduk,$data);  
        if($edit){
             $this->session->set_flashdata(
             'msg', 
@@ -103,8 +110,8 @@ class Produk extends CI_Controller {
       }
     }
 
-    public function proseshapus($id_produk){
-       $hapus= $this->Mproduk->hapus('id_produk',$id_produk);  
+    public function proseshapus($idproduk){
+       $hapus= $this->Mproduk->hapus_produk($idproduk);  
        if($hapus){
             $this->session->set_flashdata(
             'msg', 

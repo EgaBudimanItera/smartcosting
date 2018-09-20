@@ -26,23 +26,23 @@
             
             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             <!-- /.box-header -->
-            <form action="#" role="form" method="post" class="form-horizontal">
+            <form action="<?=base_url()?>produk/prosesedit" role="form" method="post" class="form-horizontal">
               <div class="box-body">
                <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID Produk</label>
-                  <input type="text" readonly class="form-control" id="idproduk" name="idproduk" placeholder="ID Produk">
+                  <input type="text" readonly class="form-control" value="<?=$list->idproduk?>" name="idproduk" placeholder="ID Produk">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Produk</label>
-                  <input type="text" class="form-control" id="namaproduk" required="" name="namaroduk" placeholder="Nama Produk">
+                  <input type="text" class="form-control" id="namaproduk"  value="<?=$list->namaproduk?>" required="" name="namaroduk" placeholder="Nama Produk">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Satuan</label>
-                  <select class="form-control" id="satuan" required="" name="satuan" style="width: 100%;">
+                  <select class="form-control" id="satuan" required name="satuan" style="width: 100%;">
                     <option value="">--Pilih Satuan--</option> 
-                    <option value="Unit">Unit</option>
-                    <option value="Dus">Dus</option>
+                    <option value="Unit" <?=$list->satuan == 'Unit' ? ' selected="selected"' : '';?>>Unit</option>
+                    <option value="Dus" <?=$list->satuan == 'Dus' ? ' selected="selected"' : '';?>>Dus</option>
                   </select>
                 </div>
                
