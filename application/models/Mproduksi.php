@@ -27,10 +27,10 @@ class Mproduksi extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
-    function ambil_produksi($param_kode, $kode){
+    function ambil_produksi($kode){
         $this->db->select('*');
         $this->db->from('produksi');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idproduksi',$kode);
         return $query=$this->db->get();
     }
 

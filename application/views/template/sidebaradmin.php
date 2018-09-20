@@ -48,7 +48,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-gears"></i> Produksi</a></li>
+            <li><a href="<?=base_url()?>produksi"><i class="fa fa-gears"></i> Produksi</a></li>
             
           </ul>
         </li>
@@ -62,7 +62,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-print"></i> Produksi</a></li>
+            <li><a href="<?=base_url()?>produksi/formlaporanproduksi"><i class="fa fa-print"></i> Produksi</a></li>
           </ul>
         </li>
       </ul>

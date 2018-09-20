@@ -87,13 +87,13 @@
     $('.select2').select2()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
+      'lengthChange': true,
+      'searching'   : true  ,
+      'ordering'    : false,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
-    $('#tgllahir').datepicker({
+    $('#tglmulai').datepicker({
       autoclose: true
     })
     $('#tmt').datepicker({
@@ -105,11 +105,9 @@
     $("#info-alert").fadeTo(3000,50).slideUp(50,function(){
           $("#info-alert").slideUp(50);
       });
-     //select 2 untuk combox dosen
-    $("#dosen").select2();
-    $("#propinsi").select2();
-    $("#kecamatan").select2();
-    $("#kabupaten").select2();
+     //select 2 untuk combox produk
+    $("#idproduk").select2();
+    
   });
 </script>
 </body>

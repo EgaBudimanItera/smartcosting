@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Produk
+        Data Produksi
       </h1>
       <?php $this->load->view('template/breadcrumb')?>
     </section>
@@ -14,7 +14,7 @@
         <div class="col-xs-12">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">List Produk</h3>
+              <h3 class="box-title">List Produksi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -26,7 +26,7 @@
 
             <div class="box-body">
               <div class="widget-body">
-                <a href="<?=base_url()?>produk/formtambah" class="btn btn-danger">Tambah Data Produk</a>
+                <a href="<?=base_url()?>produksi/formtambah" class="btn btn-danger">Tambah Data Produksi</a>
               </div>  
               <br>
               <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
@@ -36,9 +36,11 @@
                   <thead>
                     <tr>
                       <th>No</th>
+                      <th>ID Produksi</th>
+                      <th>Tanggal</th>
                       <th>Nama Produk</th>
-                      <th>Satuan</th>
                       <th>Jumlah</th>
+                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -49,8 +51,10 @@
                       <td></td>
                       <td></td>
                       <td></td>
+                      <td></td>
+                      <td></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="#"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>produksi/formedit/1"><i class="fa fa-pencil"></i></a>
                        
                         <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>

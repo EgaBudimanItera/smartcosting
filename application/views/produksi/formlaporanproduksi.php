@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tambah Data Produksi
+        Form Laporan Produksi
       </h1>
       <?php $this->load->view('template/breadcrumb')?>
     </section>
@@ -32,32 +32,35 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">ID Produksi</label>
-                      <input type="text" class="form-control" id="idproduksi" required="" name="idproduksi" placeholder="ID Produksi">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Produk</label>
                       <select class="form-control" id="idproduk" required="" name="idproduk" style="width: 100%;">
-                        <option value="">--Pilih Produk--</option> 
+                        <option value="">--Pilih Produksi--</option> 
                       </select>
                     </div>  
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Tanggal Mulai Produksi</label>
-                      <div class="input-group date">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" class="form-control" id="tglmulai" name="tglmulai">
-                      </div>
+                      <label for="exampleInputEmail1">Bulan Produksi</label>
+                      <select class="form-control" id="bulan" required="" name="bulan" style="width: 100%;">
+                        <option value="">--Pilih Bulan Produksi--</option> 
+                        <option value="1">Januari</option> 
+                        <option value="2">Februari</option> 
+                        <option value="3">Maret</option> 
+                        <option value="4">April</option> 
+                        <option value="5">Mei</option> 
+                        <option value="6">Juni</option> 
+                        <option value="7">Juli</option> 
+                        <option value="8">Agustus</option> 
+                        <option value="9">September</option> 
+                        <option value="10">Oktober</option> 
+                        <option value="11">November</option> 
+                        <option value="12">Desember</option> 
+                      </select>
                     </div>  
                   </div> 
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Rencana Jumlah Produksi</label>
-                      <input type="number" class="form-control" id="jumlrencana" required="" name="jumlrencana" placeholder="Jumlah Rencana Produksi">
+                      <label for="exampleInputEmail1">Tahun Produksi</label>
+                      <input type="number" class="form-control" id="tahun" required="" name="tahun" placeholder="Jumlah Rencana Produksi">
                     </div>  
                   </div> 
                 </div>
@@ -67,7 +70,7 @@
                   <button type="button" class="btn btn-warning" onclick="self.history.back()">
                   <i class="fa fa-chevron-left"></i> Kembali
                 </button>
-                  <button type="submit" class="btn btn-success pull-right">Simpan</button>
+                  <button type="submit" class="btn btn-success pull-right">Lihat Laporan</button>
               </div>
             </form>
           </div>

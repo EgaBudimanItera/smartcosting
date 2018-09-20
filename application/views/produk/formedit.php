@@ -45,10 +45,7 @@
                     <option value="Dus">Dus</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Jumlah Produk</label>
-                  <input type="number" class="form-control" id="jumlah" required="" name="jumlah" placeholder="Jumlah Produk">
-                </div>
+               
                </div>
               </div>
               <!-- /.box-body -->

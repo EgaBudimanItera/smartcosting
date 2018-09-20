@@ -23,7 +23,6 @@ class Mproduk extends CI_Model {
     function list_produk(){
          $this->db->select('*');
          $this->db->from('produk');
-         
          return $query=$this->db->get()->result();
     }
 
