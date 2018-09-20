@@ -35,6 +35,7 @@ class Bahanbaku extends CI_Controller {
                 'Data Bahan Baku' => base_url() . 'bahanbaku',
                 'Tambah Data' =>base_url(). 'bahanbaku/formtambah'
             ),
+            'idbb'=>$this->Mbahanbaku->kode_bahanbaku(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -42,7 +43,7 @@ class Bahanbaku extends CI_Controller {
         $this->load->view('template/footer');
     }
 
-    public function formedit($id_bahanbaku){
+    public function formedit($idbb){
         $data = array(
             'page' => 'bahanbaku/formedit',
             'link' => 'bahanbaku',
@@ -52,7 +53,7 @@ class Bahanbaku extends CI_Controller {
                 'Data Bahan Baku' => base_url() . 'bahanbaku',
                 'Edit Data' =>base_url(). 'bahanbaku/formedit'
             ),
-            'list'=>$this->Mbahanbaku->ambil($id_bahanbaku)->row(),
+            'list'=>$this->Mbahanbaku->ambil_bahanbaku($idbb)->row(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -61,11 +62,15 @@ class Bahanbaku extends CI_Controller {
     }
 
     public function prosessimpan(){
-      $nMbahanbaku=$this->input->post('nMbahanbaku',true);
+      $idbb=$this->Mbahanbaku->kode_bahanbaku();
+      $namabb=$this->input->post('namabb',true);
+      $satuan=$this->input->post('satuan',true);
       $data=array(
-        'nMbahanbaku'=>$nMbahanbaku,
+        'idbb'=>$idbb,
+        'namabb'=>$namabb,
+        'satuan'=>$satuan,
       );
-      $simpan = $this->Mbahanbaku->simpan_data($data);
+      $simpan = $this->Mbahanbaku->simpan_bahanbaku($data);
       if($simpan){
             $this->session->set_flashdata(
             'msg', 
@@ -82,12 +87,14 @@ class Bahanbaku extends CI_Controller {
     }
 
     public function prosesedit(){
-       $id_bahanbaku=$this->input->post('id_bahanbaku',true);
-       $nMbahanbaku=$this->input->post('nMbahanbaku2',true);
+       $idbb=$this->input->post('idbb',true);
+       $namabb=$this->input->post('namabb',true);
+       $satuan=$this->input->post('satuan',true);
        $data=array(
-         'nMbahanbaku'=>$nMbahanbaku,
+         'namabb'=>$namabb,
+         'satuan'=>$satuan,
        ); 
-       $edit= $this->Mbahanbaku->update('id_bahanbaku',$id_bahanbaku,$data);  
+       $edit= $this->Mbahanbaku->ubah_bahanbaku($idbb,$data);  
        if($edit){
             $this->session->set_flashdata(
             'msg', 
@@ -103,8 +110,8 @@ class Bahanbaku extends CI_Controller {
       }
     }
 
-    public function proseshapus($id_bahanbaku){
-       $hapus= $this->Mbahanbaku->hapus('id_bahanbaku',$id_bahanbaku);  
+    public function proseshapus($idbb){
+       $hapus= $this->Mbahanbaku->hapus_bahanbaku($id_bahanbaku);  
        if($hapus){
             $this->session->set_flashdata(
             'msg', 

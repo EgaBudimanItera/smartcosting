@@ -26,16 +26,16 @@
             
             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             <!-- /.box-header -->
-            <form action="#" role="form" method="post" class="form-horizontal">
+            <form action="<?=base_url()?>bahanbaku/prosessimpan" role="form" method="post" class="form-horizontal">
               <div class="box-body">
                <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID Bahan Baku</label>
-                  <input type="text" class="form-control" id="idbb" required="" name="idbb" placeholder="ID Bahan Baku">
+                  <input type="text" class="form-control" value="<?=$idbb?>" readonly name="idbb" placeholder="ID Bahan Baku">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Bahan Baku</label>
-                  <input type="text" class="form-control" id="namaabb" required="" name="namabb" placeholder="Nama Bahan Baku">
+                  <input type="text" class="form-control"  required="" name="namabb" placeholder="Nama Bahan Baku">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Satuan</label>

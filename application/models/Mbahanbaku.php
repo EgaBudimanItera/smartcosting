@@ -8,14 +8,14 @@ class Mbahanbaku extends CI_Model {
         return true;
     }
 
-    function ubah_bahanbaku($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
+    function ubah_bahanbaku($kode, $data){       
+        $this->db->where('idbb', $kode);
         $this->db->update('bahanbaku', $data); 
         return true;
     }
 
-    function hapus_bahanbaku($param_kode, $kode){
-        $this->db->delete('bahanbaku', array($param_kode => $kode)); 
+    function hapus_bahanbaku($kode){
+        $this->db->delete('bahanbaku', array('idbb' => $kode)); 
         return true;
     }
 
@@ -27,10 +27,10 @@ class Mbahanbaku extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
-    function ambil_bahanbaku($param_kode, $kode){
+    function ambil_bahanbaku($kode){
         $this->db->select('*');
         $this->db->from('bahanbaku');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idbb',$kode);
         return $query=$this->db->get();
     }
 
