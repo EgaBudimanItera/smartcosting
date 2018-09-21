@@ -26,12 +26,12 @@
             
             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             <!-- /.box-header -->
-            <form action="#" role="form" method="post" class="form-horizontal">
+            <form action="<?=base_url()?>op/prosessimpan" role="form" method="post" class="form-horizontal">
               <div class="box-body">
                <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID Overhead Pabrik</label>
-                  <input type="text" class="form-control" id="idop" required="" name="idop" placeholder="ID Overhead Pabrik">
+                  <input type="text" class="form-control" readonly="" value="<?=$idop?>" name="idop" placeholder="ID Overhead Pabrik">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Overhead Pabrik</label>
@@ -39,10 +39,10 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Jenis Overhead Pabrik</label>
-                  <select class="form-control" id="satuan" required="" name="satuan" style="width: 100%;">
+                  <select class="form-control" id="keterangan" required="" name="keterangan" style="width: 100%;">
                     <option value="">--Pilih Overhead Pabrik--</option> 
-                    <option value="Tetap">Tetap</option>
-                    <option value="Berubah">Berubah</option>
+                    <option value="0">Fixed Cost</option>
+                    <option value="1">Variable Cost</option>
                   </select>
                 </div>
                </div>

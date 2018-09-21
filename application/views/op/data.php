@@ -32,7 +32,7 @@
               <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -43,18 +43,30 @@
                     </tr>
                   </thead>
                   <tbody>
-                    
+                    <?php
+                      $no=1;
+                      foreach($list as $l){
+                        if($l->keterangan=="0"){
+                          $ket="Fixed Cost";
+                        }else{
+                           $ket="Variable Cost";
+                        }
+                    ?>
+
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->idop?></td>
+                      <td><?=$l->namaop?></td>
+                      <td><?=$ket?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="#"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>op/formedit/<?=$l->idop?>"><i class="fa fa-pencil"></i></a>
                        
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>op/proseshapus/<?=$l->idop?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                    <?php
+                      }
+                    ?>
                   </tbody>
                 </table>
               </div>

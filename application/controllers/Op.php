@@ -35,6 +35,7 @@ class Op extends CI_Controller {
                 'Data Overhead Pabrik' => base_url() . 'op',
                 'Tambah Data' =>base_url(). 'op/formtambah'
             ),
+            'idop'=>$this->Mop->kode_op(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -42,7 +43,7 @@ class Op extends CI_Controller {
         $this->load->view('template/footer');
     }
 
-    public function formedit($id_op){
+    public function formedit($idop){
         $data = array(
             'page' => 'op/formedit',
             'link' => 'op',
@@ -52,7 +53,7 @@ class Op extends CI_Controller {
                 'Data Overhead Pabrik' => base_url() . 'op',
                 'Edit Data' =>base_url(). 'op/formedit'
             ),
-            'list'=>$this->Mop->ambil($id_op)->row(),
+            'list'=>$this->Mop->ambil_op($idop)->row(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -61,11 +62,15 @@ class Op extends CI_Controller {
     }
 
     public function prosessimpan(){
-      $nMop=$this->input->post('nMop',true);
+      $namaop=$this->input->post('namaop',true);
+      $idop=$this->Mop->kode_op();
+      $keterangan=$this->input->post('keterangan',true);
       $data=array(
-        'nMop'=>$nMop,
+        'idop'=>$idop,
+        'namaop'=>$namaop,
+        'keterangan'=>$keterangan,
       );
-      $simpan = $this->Mop->simpan_data($data);
+      $simpan = $this->Mop->simpan_op($data);
       if($simpan){
             $this->session->set_flashdata(
             'msg', 
@@ -82,12 +87,14 @@ class Op extends CI_Controller {
     }
 
     public function prosesedit(){
-       $id_op=$this->input->post('id_op',true);
-       $nMop=$this->input->post('nMop2',true);
+       $namaop=$this->input->post('namaop',true);
+       $idop=$this->input->post('idop',true);
+       $keterangan=$this->input->post('keterangan',true);
        $data=array(
-         'nMop'=>$nMop,
+        'namaop'=>$namaop,
+        'keterangan'=>$keterangan,
        ); 
-       $edit= $this->Mop->update('id_op',$id_op,$data);  
+       $edit= $this->Mop->ubah_op($idop,$data);  
        if($edit){
             $this->session->set_flashdata(
             'msg', 

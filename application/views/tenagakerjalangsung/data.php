@@ -29,32 +29,39 @@
                 <a href="<?=base_url()?>tenagakerjalangsung/formtambah" class="btn btn-danger">Tambah Data Tenaga Kerja Langsung</a>
               </div>  
               <br>
-              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+              
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div> 
+            </div>
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>No</th>
                       <th>ID TKL</th>
                       <th>Nama TKL</th>
-                      
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    
+                    <?php
+                      $no=1;
+                      foreach($list as $l){
+                    ?>
                     <tr>
-                      
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->idtkl?></td>
+                      <td><?=$l->namatkl?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="#"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>tenagakerjalangsung/formedit/<?=$l->idtkl?>"><i class="fa fa-pencil"></i></a>
                        
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>tenagakerjalangsung/proseshapus/<?=$l->idtkl?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                    <?php    
+                      }
+                    ?>
                   </tbody>
                 </table>
               </div>

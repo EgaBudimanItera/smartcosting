@@ -35,6 +35,7 @@ class Tenagakerjalangsung extends CI_Controller {
                 'Data Tenaga Kerja Langsung' => base_url() . 'tenagakerjalangsung',
                 'Tambah Data' =>base_url(). 'tenagakerjalangsung/formtambah'
             ),
+            'idtkl'=>$this->Mtenagakerjalangsung->kode_tenagakerjalangsung(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -52,7 +53,7 @@ class Tenagakerjalangsung extends CI_Controller {
                 'Data Tenaga Kerja Langsung' => base_url() . 'tenagakerjalangsung',
                 'Edit Data' =>base_url(). 'tenagakerjalangsung/formedit'
             ),
-            'list'=>$this->Mtenagakerjalangsung->ambil($id_tenagakerjalangsung)->row(),
+            'list'=>$this->Mtenagakerjalangsung->ambil_tenagakerjalangsung($id_tenagakerjalangsung)->row(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -61,11 +62,13 @@ class Tenagakerjalangsung extends CI_Controller {
     }
 
     public function prosessimpan(){
-      $nMtenagakerjalangsung=$this->input->post('nMtenagakerjalangsung',true);
+      $idtkl=$this->Mtenagakerjalangsung->kode_tenagakerjalangsung();
+      $namatkl=$this->input->post('namatkl',true);
       $data=array(
-        'nMtenagakerjalangsung'=>$nMtenagakerjalangsung,
+        'idtkl'=>$idtkl,
+        'namatkl'=>$namatkl,
       );
-      $simpan = $this->Mtenagakerjalangsung->simpan_data($data);
+      $simpan = $this->Mtenagakerjalangsung->simpan_tenagakerjalangsung($data);
       if($simpan){
             $this->session->set_flashdata(
             'msg', 
@@ -82,12 +85,12 @@ class Tenagakerjalangsung extends CI_Controller {
     }
 
     public function prosesedit(){
-       $id_tenagakerjalangsung=$this->input->post('id_tenagakerjalangsung',true);
-       $nMtenagakerjalangsung=$this->input->post('nMtenagakerjalangsung2',true);
+      $idtkl=$this->input->post('idtkl',true);
+      $namatkl=$this->input->post('namatkl',true);
        $data=array(
-         'nMtenagakerjalangsung'=>$nMtenagakerjalangsung,
+         'namatkl'=>$namatkl,
        ); 
-       $edit= $this->Mtenagakerjalangsung->update('id_tenagakerjalangsung',$id_tenagakerjalangsung,$data);  
+       $edit= $this->Mtenagakerjalangsung->ubah_tenagakerjalangsung($idtkl,$data);  
        if($edit){
             $this->session->set_flashdata(
             'msg', 
@@ -103,8 +106,8 @@ class Tenagakerjalangsung extends CI_Controller {
       }
     }
 
-    public function proseshapus($id_tenagakerjalangsung){
-       $hapus= $this->Mtenagakerjalangsung->hapus('id_tenagakerjalangsung',$id_tenagakerjalangsung);  
+    public function proseshapus($idtkl){
+       $hapus= $this->Mtenagakerjalangsung->hapus_tenagakerjalangsung($idtkl);  
        if($hapus){
             $this->session->set_flashdata(
             'msg', 

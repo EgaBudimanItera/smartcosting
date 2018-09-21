@@ -8,14 +8,14 @@ class Mop extends CI_Model {
         return true;
     }
 
-    function ubah_op($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
+    function ubah_op($kode, $data){       
+        $this->db->where('idop', $kode);
         $this->db->update('op', $data); 
         return true;
     }
 
-    function hapus_op($param_kode, $kode){
-        $this->db->delete('op', array($param_kode => $kode)); 
+    function hapus_op($kode){
+        $this->db->delete('op', array('idop' => $kode)); 
         return true;
     }
 
@@ -27,10 +27,10 @@ class Mop extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
-    function ambil_op($param_kode, $kode){
+    function ambil_op($kode){
         $this->db->select('*');
         $this->db->from('op');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idop',$kode);
         return $query=$this->db->get();
     }
 

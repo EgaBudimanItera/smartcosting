@@ -26,15 +26,15 @@
             
             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             <!-- /.box-header -->
-            <form action="#" role="form" method="post" class="form-horizontal">
+            <form action="<?=base_url()?>tenagakerjalangsung/prosessimpan" role="form" method="post" class="form-horizontal">
               <div class="box-body">
                <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID Tenaga Kerja Langsung</label>
-                  <input type="text" class="form-control" id="idtkl" required="" name="idtkl" placeholder="ID Tenaga Kerja Langsung">
+                  <input type="text" class="form-control" readonly value="<?=$idtkl?>" name="idtkl" placeholder="ID Tenaga Kerja Langsung">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nama Tenaga Kerja Langsung</label>
+                  <label for="exampleInputEmail1">Nama Kegiatan Tenaga Kerja Langsung</label>
                   <input type="text" class="form-control" id="namatkl" required="" name="namatkl" placeholder="Nama Tenaga Kerja Langsung">
                 </div>
                </div>

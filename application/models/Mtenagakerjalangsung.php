@@ -8,14 +8,14 @@ class Mtenagakerjalangsung extends CI_Model {
         return true;
     }
 
-    function ubah_tenagakerjalangsung($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
+    function ubah_tenagakerjalangsung($kode, $data){       
+        $this->db->where('idtkl', $kode);
         $this->db->update('tenagakerjalangsung', $data); 
         return true;
     }
 
-    function hapus_tenagakerjalangsung($param_kode, $kode){
-        $this->db->delete('tenagakerjalangsung', array($param_kode => $kode)); 
+    function hapus_tenagakerjalangsung($kode){
+        $this->db->delete('tenagakerjalangsung', array('idtkl' => $kode)); 
         return true;
     }
 
@@ -27,18 +27,18 @@ class Mtenagakerjalangsung extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
-    function ambil_tenagakerjalangsung($param_kode, $kode){
+    function ambil_tenagakerjalangsung($kode){
         $this->db->select('*');
         $this->db->from('tenagakerjalangsung');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idtkl',$kode);
         return $query=$this->db->get();
     }
 
     function kode_tenagakerjalangsung(){
     	//N201700001
-    	$this->db->select('Right(idbb,5) as kode',false);
+    	$this->db->select('Right(idtkl,5) as kode',false);
     	
-    	$this->db->order_by('idbb','desc');
+    	$this->db->order_by('idtkl','desc');
     	$this->db->limit(1);
     	$query = $this->db->get('tenagakerjalangsung');
 
@@ -50,7 +50,7 @@ class Mtenagakerjalangsung extends CI_Model {
 
         }
         $kodemax = str_pad($kode,5,"0",STR_PAD_LEFT);
-        $kodejadi  = "R".$kodemax;
+        $kodejadi  = "T".$kodemax;
         return $kodejadi;
    	}
 }
