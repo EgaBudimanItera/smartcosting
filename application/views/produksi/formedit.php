@@ -29,25 +29,25 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">ID Produksi</label>
-                    <input type="text" class="form-control" id="idproduksi" readonly name="idproduksi" placeholder="ID Produksi">
+                    <input type="text" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Produk</label>
-                    <input type="text" class="form-control" id="Produk" readonly name="Produk" placeholder="Nama Produk">
+                    <input type="text" class="form-control" value="<?=$list->namaproduk?>" readonly name="Produk" placeholder="Nama Produk">
                   </div>  
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Tanggal Mulai Produksi</label>
-                    <input type="text" class="form-control" id="tglmulai" readonly name="tglmulai" placeholder="Tanggal Mulai Produksi">
+                    <input type="text" class="form-control" value="<?=$list->tglmulai?>" readonly name="tglmulai" placeholder="Tanggal Mulai Produksi">
                   </div>  
                 </div> 
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Rencana Jumlah Produksi</label>
-                    <input type="number" class="form-control" id="jumlrencana" readonly name="jumlrencana" placeholder="Jumlah Rencana Produksi">
+                    <input type="text" class="form-control" value="<?php echo number_format($list->jumlrencana)?>" readonly name="jumlrencana" placeholder="Jumlah Rencana Produksi">
                   </div>  
                 </div> 
                 <!-- /.box-body -->
@@ -76,29 +76,61 @@
             
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" role="form" method="post" class="form-horizontal">
-                <div class="col-md-12">
+              <form action="<?=base_url()?>produksi/proseseditjumlahproduksi" role="form" method="post" class="form-horizontal">
+                <div class="col-md-5">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Jumlah Proses Awal</label>
-                    <input type="number" class="form-control" id="jumlprosesawal" name="jumlprosesawal" placeholder="Jumlah Proses Awal">
+                    <input type="text" class="form-control" value="<?php echo number_format($list->jumlprosesawal)?>" name="jumlprosesawalview" placeholder="Jumlah Proses Awal" readonly>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" name="idproduksi" placeholder="ID Produksi">
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-1">
+                  
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->jumlprosesawal?>" name="jumlprosesawal" placeholder="Jumlah Proses Awal">
+                  </div>
+                </div>
+                <div class="col-md-5">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Jumlah Produksi</label>
-                    <input type="number" class="form-control" id="jumlproduksi" name="jumlproduksi" placeholder="Jumlah Produksi">
+                    <input type="text" class="form-control" value="<?php echo number_format($list->jumlproduksi)?>" name="jumlproduksiview" readonly placeholder="Jumlah Produksi">
                   </div>  
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->jumlproduksi?>" name="jumlproduksi" placeholder="Jumlah Produksi">
+                  </div>  
+                </div>
+
+                <div class="col-md-5">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Jumlah Selesai</label>
-                    <input type="number" class="form-control" id="jumlselesai" name="jumlselesai" placeholder="Jumlah Selesai">
+                    <input type="text" class="form-control" readonly="" value="<?php echo number_format($list->jumlselesai)?>" name="jumlselesaiview" placeholder="Jumlah Selesai">
                   </div>  
                 </div> 
-                <div class="col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->jumlselesai?>" name="jumlselesai" placeholder="Jumlah Selesai">
+                  </div>  
+                </div> 
+                <div class="col-md-5">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Jumlah Proses Akhir</label>
-                    <input type="number" class="form-control" id="jumlprosesakhir" name="jumlprosesakhir" placeholder="Jumlah Proses Akhir">
+                    <input type="text" class="form-control" value="<?php echo number_format($list->jumlprosesakhir)?>"  name="jumlprosesakhirview" readonly placeholder="Jumlah Proses Akhir">
+                  </div>  
+                </div> 
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->jumlprosesakhir?>" name="jumlprosesakhir" placeholder="Jumlah Proses Akhir">
                   </div>  
                 </div> 
                 <!-- /.box-body -->
@@ -123,23 +155,46 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" role="form" method="post" class="form-horizontal">
-                <div class="col-md-12">
+              <form action="<?=base_url()?>produksi/proseseditpersenawal" role="form" method="post" class="form-horizontal">
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Bahan Baku Awal</label>
-                    <input type="number" class="form-control" id="pbbprosesawal" name="pbbprosesawal" placeholder="Persentase Bahan Baku Awal">
+                    <label for="exampleInputEmail1">Persentase Bahan Baku Awal (%)</label>
+                    <input type="text" readonly class="form-control" value="<?php echo number_format($list->pbbprosesawal)?>" name="pbbprosesawalview" placeholder="Persentase Bahan Baku Awal">
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" name="idproduksi" placeholder="ID Produksi">
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Tenaga Kerja Langsung Awal</label>
-                    <input type="number" class="form-control" id="ptklprosesawal" name="ptklprosesawal" placeholder="Persentase Tenaga Kerja Langsung Awal">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" required class="form-control" name="pbbprosesawal" value="<?=$list->pbbprosesawal?>" placeholder="Persentase Bahan Baku Awal">
+                   
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Biaya Overhead Pabrik Awal</label>
-                    <input type="number" class="form-control" id="pbopprosesawal" name="pbopprosesawal" placeholder="Persentase Biaya Overhead Pabrik Awal">
+                    <label for="exampleInputEmail1">Persentase TKL Awal (%)</label>
+                    <input type="text" readonly class="form-control" value="<?php echo number_format($list->ptklprosesawal)?>" name="ptklprosesawalview" placeholder="Persentase Tenaga Kerja Langsung Awal">
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" required class="form-control" value="<?=$list->ptklprosesawal?>" name="ptklprosesawal" placeholder="Persentase Tenaga Kerja Langsung Awal">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Persentase BOP Awal (%)</label>
+                    <input type="text" readonly class="form-control" value="<?php echo number_format($list->pbopprosesawal)?>" name="pbopprosesawalview" placeholder="Persentase Biaya Overhead Pabrik Awal">
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" required class="form-control" value="<?=$list->pbopprosesawal?>" name="pbopprosesawal" placeholder="Persentase Biaya Overhead Pabrik Awal">
                   </div>
                 </div>
                 <!-- /.box-body -->
@@ -164,23 +219,45 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" role="form" method="post" class="form-horizontal">
-                <div class="col-md-12">
+              <form action="<?=base_url()?>produksi/proseseditpersenakhir" role="form" method="post" class="form-horizontal">
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Bahan Baku Akhir</label>
-                    <input type="number" class="form-control" id="pbbprosesakhir" name="pbbprosesakhir" placeholder="Persentase Bahan Baku Akhir">
+                    <label for="exampleInputEmail1">Persentase Bahan Baku Akhir (%)</label>
+                    <input type="text" readonly class="form-control" value="<?php echo number_format($list->pbbprosesakhir)?>" name="pbbprosesakhirview" placeholder="Persentase Bahan Baku Akhir">
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" name="idproduksi" placeholder="ID Produksi">
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Tenaga Kerja Langsung Akhir</label>
-                    <input type="number" class="form-control" id="ptklprosesakhir" name="ptklprosesakhir" placeholder="Persentase Tenaga Kerja Langsung Akhir">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->pbbprosesakhir?>" name="pbbprosesakhir" required placeholder="Persentase Bahan Baku Akhir">
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-5">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Persentase Biaya Overhead Pabrik Akhir</label>
-                    <input type="number" class="form-control" id="pbopprosesakhir" name="pbopprosesakhir" placeholder="Persentase Biaya Overhead Pabrik Akhir">
+                    <label for="exampleInputEmail1">Persentase TKL Akhir (%)</label>
+                    <input type="text" class="form-control" value="<?php echo number_format($list->ptklprosesakhir)?>" name="ptklprosesakhirview" readonly placeholder="Persentase Tenaga Kerja Langsung Akhir">
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" class="form-control" value="<?=$list->ptklprosesakhir?>" name="ptklprosesakhir" required placeholder="Persentase Tenaga Kerja Langsung Akhir">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Persentase BOP Akhir (%)</label>
+                    <input type="text" readonly class="form-control" value="<?php echo number_format($list->pbopprosesakhir)?>" name="pbopprosesakhirview" placeholder="Persentase Biaya Overhead Pabrik Akhir">
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">-</label>
+                    <input type="number" required class="form-control" value="<?=$list->pbopprosesakhir?>" name="pbopprosesakhir" placeholder="Persentase Biaya Overhead Pabrik Akhir">
                   </div>
                 </div>
                 <!-- /.box-body -->
@@ -209,9 +286,16 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Bahan Baku</label>
-                    <select class="form-control" id="idbb" required="" name="idbb" style="width: 100%;">
-                        <option value="">--Pilih Bahan Baku--</option> 
-                      </select>
+                    <select class="form-control" id="idbb" placeholder="--Pilih Bahan Baku--" required="" name="idbb" style="width: 100%;">
+                      <option value="">--Pilih Bahan Baku--</option> 
+                      <?php
+                        foreach($bahanbaku as $b){
+                      ?>
+                      <option value="<?=$b->idbb?>"><?=$b->namabb?></option>
+                      <?php
+                        }
+                      ?> 
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -266,9 +350,16 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Bahan Baku</label>
-                    <select class="form-control" id="idbb" required="" name="idbb" style="width: 100%;">
-                        <option value="">--Pilih Bahan Baku--</option> 
-                      </select>
+                    <select class="form-control" id="idbb2" required="" name="idbb" style="width: 100%;">
+                      <option value="">--Pilih Bahan Baku--</option> 
+                      <?php
+                        foreach($bahanbaku as $b){
+                      ?>
+                      <option value="<?=$b->idbb?>"><?=$b->namabb?></option>
+                      <?php
+                        }
+                      ?> 
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -324,8 +415,15 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Kegiatan</label>
                     <select class="form-control" id="idtkl" required="" name="idtkl" style="width: 100%;">
-                        <option value="">--Pilih Kegiatan--</option> 
-                      </select>
+                      <option value="">--Pilih Kegiatan--</option>
+                      <?php
+                        foreach($tkl as $t){
+                      ?>
+                      <option value="<?=$t->idtkl?>"><?=$t->namatkl?></option>
+                      <?php
+                        }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -380,9 +478,16 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Kegiatan</label>
-                    <select class="form-control" id="idtkl" required="" name="idtkl" style="width: 100%;">
-                        <option value="">--Pilih Kegiatan--</option> 
-                      </select>
+                    <select class="form-control" id="idtkl2" required="" name="idtkl" style="width: 100%;">
+                      <option value="">--Pilih Kegiatan--</option> 
+                      <?php
+                        foreach($tkl as $t){
+                      ?>
+                      <option value="<?=$t->idtkl?>"><?=$t->namatkl?></option>
+                      <?php
+                        }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -437,9 +542,16 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Biaya</label>
-                    <select class="form-control" id="idtkl" required="" name="idtkl" style="width: 100%;">
-                        <option value="">--Pilih BOP--</option> 
-                      </select>
+                    <select class="form-control" id="idop" required="" name="idtkl" style="width: 100%;">
+                      <option value="">--Pilih BOP--</option> 
+                      <?php
+                        foreach($op as $t){
+                      ?>
+                      <option value="<?=$t->idop?>"><?=$t->namaop?></option>
+                      <?php
+                        }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -494,9 +606,16 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Biaya</label>
-                    <select class="form-control" id="idtkl" required="" name="idtkl" style="width: 100%;">
-                        <option value="">--Pilih BOP--</option> 
-                      </select>
+                    <select class="form-control" id="idbop2" required="" name="idbop" style="width: 100%;">
+                      <option value="">--Pilih BOP--</option> 
+                      <?php
+                        foreach($op as $t){
+                      ?>
+                      <option value="<?=$t->idop?>"><?=$t->namaop?></option>
+                      <?php
+                        }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-12">

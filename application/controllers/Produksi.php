@@ -6,7 +6,7 @@ class produksi extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Mproduksi');
+		$this->load->model(array('Mproduksi','Mbahanbaku','Mop','Mtenagakerjalangsung','Mproduk','Mbiayabb','Mbiayatkl','Mbop'));
 	}
    
     public function index(){
@@ -35,6 +35,8 @@ class produksi extends CI_Controller {
                 'Data produksi' => base_url() . 'produksi',
                 'Tambah Data' =>base_url(). 'produksi/formtambah'
             ),
+            'idproduksi'=>$this->Mproduksi->kode_produksi(),
+            'produk'=>$this->Mproduk->list_produk(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -42,7 +44,7 @@ class produksi extends CI_Controller {
         $this->load->view('template/footer');
     }
 
-    public function formedit($id_produksi){
+    public function formedit($idproduksi){
         $data = array(
             'page' => 'produksi/formedit',
             'link' => 'produksi',
@@ -52,7 +54,10 @@ class produksi extends CI_Controller {
                 'Data produksi' => base_url() . 'produksi',
                 'Edit Data' =>base_url(). 'produksi/formedit'
             ),
-            'list'=>$this->Mproduksi->ambil_produksi($id_produksi)->row(),
+            'list'=>$this->Mproduksi->ambil_produksi($idproduksi)->row(),
+            'bahanbaku'=>$this->Mbahanbaku->list_bahanbaku(),
+            'tkl'=>$this->Mtenagakerjalangsung->list_tenagakerjalangsung(),
+            'op'=>$this->Mop->list_op(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -96,11 +101,17 @@ class produksi extends CI_Controller {
     }
 
     public function prosessimpan(){
-      $nMproduksi=$this->input->post('nMproduksi',true);
+      $idproduksi=$this->Mproduksi->kode_produksi();
+      $idproduk=$this->input->post('idproduk',0);
+      $tglmulai=date_format(date_create($this->input->post('tglmulai',true)),"Y-m-d");
+      $jumlrencana=$this->input->post('jumlrencana',0);
       $data=array(
-        'nMproduksi'=>$nMproduksi,
+        'idproduksi'=>$idproduksi,
+        'idproduk'=>$idproduk,
+        'tglmulai'=>$tglmulai,
+        'jumlrencana'=>$jumlrencana,
       );
-      $simpan = $this->Mproduksi->simpan_data($data);
+      $simpan = $this->Mproduksi->simpan_produksi($data);
       if($simpan){
             $this->session->set_flashdata(
             'msg', 
@@ -116,30 +127,93 @@ class produksi extends CI_Controller {
       }
     }
 
-    public function prosesedit(){
-       $id_produksi=$this->input->post('id_produksi',true);
-       $nMproduksi=$this->input->post('nMproduksi2',true);
-       $data=array(
-         'nMproduksi'=>$nMproduksi,
-       ); 
-       $edit= $this->Mproduksi->update('id_produksi',$id_produksi,$data);  
-       if($edit){
+    public function proseseditjumlahproduksi(){
+        $idproduksi=$this->input->post('idproduksi',true);
+        $jumlprosesawal=$this->input->post('jumlprosesawal',true);
+        $jumlproduksi=$this->input->post('jumlproduksi',true);
+        $jumlprosesakhir=$this->input->post('jumlprosesakhir',true);
+        $jumlselesai=$this->input->post('jumlselesai',true);
+        $data=array(
+          'jumlprosesawal'=>$jumlprosesawal,
+          'jumlproduksi'=>$jumlproduksi,
+          'jumlprosesakhir'=>$jumlprosesakhir,
+          'jumlselesai'=>$jumlselesai,
+        );
+
+        $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
+        if($editproduksi){
             $this->session->set_flashdata(
             'msg', 
-            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diedit !</div>'
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
         );
-            redirect(produksi);
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
         }else{
             $this->session->set_flashdata(
             'msg', 
-            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diedit !</div>'
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
         );
-            redirect(produksi/formedit);
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
       }
     }
 
-    public function proseshapus($id_produksi){
-       $hapus= $this->Mproduksi->hapus('id_produksi',$id_produksi);  
+    public function proseseditpersenawal(){
+        $idproduksi=$this->input->post('idproduksi',true);
+        $pbbprosesawal=$this->input->post('pbbprosesawal',true);
+        $ptklprosesawal=$this->input->post('ptklprosesawal',true);
+        $pbopprosesawal=$this->input->post('pbopprosesawal',true);
+        
+        $data=array(
+          'pbbprosesawal'=>$pbbprosesawal,
+          'ptklprosesawal'=>$ptklprosesawal,
+          'pbopprosesawal'=>$pbopprosesawal,
+        );
+        
+        $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
+        if($editproduksi){
+            $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+        );
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
+        }else{
+            $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+        );
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
+      }
+    }
+
+    public function proseseditpersenakhir(){
+        $idproduksi=$this->input->post('idproduksi',true);
+        $pbbprosesakhir=$this->input->post('pbbprosesakhir',true);
+        $ptklprosesakhir=$this->input->post('ptklprosesakhir',true);
+        $pbopprosesakhir=$this->input->post('pbopprosesakhir',true);
+        
+        $data=array(
+          'pbbprosesakhir'=>$pbbprosesakhir,
+          'ptklprosesakhir'=>$ptklprosesakhir,
+          'pbopprosesakhir'=>$pbopprosesakhir,
+        );
+        
+        $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
+        if($editproduksi){
+            $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+        );
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
+        }else{
+            $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+        );
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
+      }
+    }
+
+    public function proseshapus($idproduksi){
+       $hapus= $this->Mproduksi->hapus_produksi($idproduksi);  
        if($hapus){
             $this->session->set_flashdata(
             'msg', 

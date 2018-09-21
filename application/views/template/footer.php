@@ -107,6 +107,12 @@
       });
      //select 2 untuk combox produk
     $("#idproduk").select2();
+    $("#idbb").select2();
+    $("#idbb2").select2();
+    $("#idtkl").select2();
+    $("#idtkl2").select2();
+    $("#idop").select2();
+    $("#idop2").select2();
     
   });
 </script>

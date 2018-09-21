@@ -32,7 +32,7 @@
               <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -45,20 +45,34 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php
+                      $no=1;
+                      foreach ($list as $l){
+                        if($l->statusproduksi=='0'){
+                          $ket='Sedang Diproduksi';
+                        }elseif ($l->statusproduksi=='1') {
+                          $ket='Selesai Diproduksi';
+                        }else{
+                          $ket='Transfer';
+                        }
+                    ?>
                     
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->idproduksi?></td>
+                      <td><?=$l->tglmulai?></td>
+                      <td><?=$l->namaproduk?></td>
+                      <td><?=$l->jumlrencana?></td>
+                      <td><?=$ket?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>produksi/formedit/1"><i class="fa fa-pencil"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>produksi/formedit/<?=$l->idproduksi?>"><i class="fa fa-pencil"></i></a>
                        
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>produksi/proseshapus/<?=$l->idproduksi?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                    <?php
+                      }
+                    ?>
                   </tbody>
                 </table>
               </div>

@@ -32,7 +32,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">ID Produksi</label>
-                      <input type="text" class="form-control" id="idproduksi" required="" name="idproduksi" placeholder="ID Produksi">
+                      <input type="text" class="form-control" readonly value="<?=$idproduksi?>" name="idproduksi" placeholder="ID Produksi">
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -40,6 +40,13 @@
                       <label for="exampleInputEmail1">Produk</label>
                       <select class="form-control" id="idproduk" required="" name="idproduk" style="width: 100%;">
                         <option value="">--Pilih Produk--</option> 
+                        <?php
+                          foreach($produk as $p){
+                        ?>
+                        <option value="<?=$p->idproduk?>"><?=$p->namaproduk?></option> 
+                        <?php
+                          }
+                        ?>
                       </select>
                     </div>  
                   </div>

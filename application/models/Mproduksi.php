@@ -8,14 +8,14 @@ class Mproduksi extends CI_Model {
         return true;
     }
 
-    function ubah_produksi($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
+    function ubah_produksi($kode, $data){       
+        $this->db->where('idproduksi', $kode);
         $this->db->update('produksi', $data); 
         return true;
     }
 
-    function hapus_produksi($param_kode, $kode){
-        $this->db->delete('produksi', array($param_kode => $kode)); 
+    function hapus_produksi($kode){
+        $this->db->delete('produksi', array('idproduksi' => $kode)); 
         return true;
     }
 
@@ -23,13 +23,14 @@ class Mproduksi extends CI_Model {
     function list_produksi(){
          $this->db->select('*');
          $this->db->from('produksi');
-        
+         $this->db->join('produk', 'produksi.idproduk = produk.idproduk');
          return $query=$this->db->get()->result();
     }
 
     function ambil_produksi($kode){
         $this->db->select('*');
         $this->db->from('produksi');
+        $this->db->join('produk', 'produksi.idproduk = produk.idproduk');
         $this->db->where('idproduksi',$kode);
         return $query=$this->db->get();
     }
