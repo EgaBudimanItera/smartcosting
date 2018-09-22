@@ -8,29 +8,38 @@ class Mbiayatkl extends CI_Model {
         return true;
     }
 
-    function ubah_biayatkl($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
-        $this->db->update('biayatkl', $data); 
-        return true;
-    }
+    
 
-    function hapus_biayatkl($param_kode, $kode){
-        $this->db->delete('biayatkl', array($param_kode => $kode)); 
+    function hapus_biayatkl($kode){
+        $this->db->delete('biayatkl', array('idbiayatkl' => $kode)); 
         return true;
     }
 
 
-    function list_biayatkl(){
+    function list_biayatklawal($idproduksi){
          $this->db->select('*');
          $this->db->from('biayatkl');
+         $this->db->join('tenagakerjalangsung', 'biayatkl.idtkl = tenagakerjalangsung.idtkl');
+         $this->db->where(array('idproduksi'=>$idproduksi,'statustkl'=>'0'));
          return $query=$this->db->get()->result();
     }
 
-    function ambil_biayatkl($param_kode, $kode){
-        $this->db->select('*');
-        $this->db->from('biayatkl');
-        $this->db->where($param_kode,$kode);
-        return $query=$this->db->get();
+    function list_biayatklakhir($idproduksi){
+         $this->db->select('*');
+         $this->db->from('biayatkl');
+         $this->db->join('tenagakerjalangsung', 'biayatkl.idtkl = tenagakerjalangsung.idtkl');
+         $this->db->where(array('idproduksi'=>$idproduksi,'statustkl'=>'1'));
+         return $query=$this->db->get()->result();
+    }
+
+    function totalbiaya($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='0'";
+        return $this->db->query($query);
+    }
+
+    function totalbiayaakhir($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='1'";
+        return $this->db->query($query);
     }
 
     function kode_biayatkl(){

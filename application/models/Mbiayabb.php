@@ -8,29 +8,42 @@ class Mbiayabb extends CI_Model {
         return true;
     }
 
-    function ubah_biayabb($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
-        $this->db->update('biayabb', $data); 
-        return true;
-    }
-
-    function hapus_biayabb($param_kode, $kode){
-        $this->db->delete('biayabb', array($param_kode => $kode)); 
+    function hapus_biayabb($kode){
+        $this->db->delete('biayabb', array('idbiayabb'=> $kode)); 
         return true;
     }
 
 
-    function list_biayabb(){
+    function list_biayabbawal($idproduksi){
          $this->db->select('*');
          $this->db->from('biayabb');
-        
+         $this->db->join('bahanbaku', 'biayabb.idbb = bahanbaku.idbb');
+         $this->db->where(array('idproduksi'=>$idproduksi,'statusbb'=>'0'));
          return $query=$this->db->get()->result();
     }
 
-    function ambil_biayabb($param_kode, $kode){
+    function list_biayabbakhir($idproduksi){
+         $this->db->select('*');
+         $this->db->from('biayabb');
+         $this->db->join('bahanbaku', 'biayabb.idbb = bahanbaku.idbb');
+         $this->db->where(array('idproduksi'=>$idproduksi,'statusbb'=>'1'));
+         return $query=$this->db->get()->result();
+    }
+
+    function totalbiaya($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayabb where idproduksi='$idproduksi' and statusbb='0'";
+        return $this->db->query($query);
+    }
+
+    function totalbiayaakhir($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayabb where idproduksi='$idproduksi' and statusbb='1'";
+        return $this->db->query($query);
+    }
+
+    function ambil_biayabb($idbbb){
         $this->db->select('*');
         $this->db->from('biayabb');
-        $this->db->where($param_kode,$kode);
+        $this->db->where('idbiayabb',$idbbb);
         return $query=$this->db->get();
     }
 

@@ -58,6 +58,11 @@ class produksi extends CI_Controller {
             'bahanbaku'=>$this->Mbahanbaku->list_bahanbaku(),
             'tkl'=>$this->Mtenagakerjalangsung->list_tenagakerjalangsung(),
             'op'=>$this->Mop->list_op(),
+            'listbbbawal'=>$this->Mbiayabb->list_biayabbawal($idproduksi),
+            'listbbbakhir'=>$this->Mbiayabb->list_biayabbakhir($idproduksi),
+            'listbtklawal'=>$this->Mbiayatkl->list_biayatklawal($idproduksi),
+            'listbtklakhir'=>$this->Mbiayatkl->list_biayatklakhir($idproduksi),
+            'listbop'=>$this->Mbop->list_bop($idproduksi),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -104,12 +109,16 @@ class produksi extends CI_Controller {
       $idproduksi=$this->Mproduksi->kode_produksi();
       $idproduk=$this->input->post('idproduk',0);
       $tglmulai=date_format(date_create($this->input->post('tglmulai',true)),"Y-m-d");
+      $bulan=date_format(date_create($this->input->post('tglmulai',true)),"m");
+      $tahun=date_format(date_create($this->input->post('tglmulai',true)),"Y");
       $jumlrencana=$this->input->post('jumlrencana',0);
       $data=array(
         'idproduksi'=>$idproduksi,
         'idproduk'=>$idproduk,
         'tglmulai'=>$tglmulai,
         'jumlrencana'=>$jumlrencana,
+        'bulan'=>$bulan,
+        'tahun'=>$tahun,
       );
       $simpan = $this->Mproduksi->simpan_produksi($data);
       if($simpan){
@@ -211,6 +220,7 @@ class produksi extends CI_Controller {
             redirect(base_url().'produksi/formedit/'.$idproduksi);
       }
     }
+
 
     public function proseshapus($idproduksi){
        $hapus= $this->Mproduksi->hapus_produksi($idproduksi);  

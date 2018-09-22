@@ -12,7 +12,9 @@
     <section class="content">
       <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
       <div class="row">
+        <!-- produksi -->
         <div class="col-xs-6">
+
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Produksi</h3>
@@ -25,7 +27,6 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">ID Produksi</label>
@@ -61,6 +62,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- Jumlah produksi -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -142,6 +144,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- % awal -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -206,6 +209,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- % akhir -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -270,6 +274,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- Bahan Baku Awal -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -282,10 +287,11 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" role="form" method="post" class="form-horizontal">
+              <form action="<?=base_url()?>biayabb/simpanbbbawal" role="form" method="post" class="form-horizontal">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Bahan Baku</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idbb" placeholder="--Pilih Bahan Baku--" required="" name="idbb" style="width: 100%;">
                       <option value="">--Pilih Bahan Baku--</option> 
                       <?php
@@ -310,6 +316,7 @@
                   <button type="submit" class="btn btn-success pull-right">Simpan</button>
                 </div>
               </form>
+              
               <table class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -320,13 +327,26 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $no=1;
+                      $total=0;
+                      foreach ($listbbbawal as $l){
+                        $total=$total+$l->jumlahbiaya;
+                    ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->namabb?></td>
+                      <td><?=$l->jumlahbiaya?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>biayabb/hapusbbbawal/<?=$l->idbiayabb?>/<?=$l->idproduksi?>/<?=$l->jumlahbiaya?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
+                    </tr>
+                    <?php    
+                      }
+                    ?>
+                    <tr>
+                      <td colspan="2">Total Biaya</td>
+                      <td colspan="2"><?php echo 'Rp '.number_format($total)?></td>
                     </tr>
                   </tbody>
               </table>
@@ -334,6 +354,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- Bahan Baku Akhir -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -346,10 +367,11 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" role="form" method="post" class="form-horizontal">
+              <form action="<?=base_url()?>biayabb/simpanbbbakhir" role="form" method="post" class="form-horizontal">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Bahan Baku</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idbb2" required="" name="idbb" style="width: 100%;">
                       <option value="">--Pilih Bahan Baku--</option> 
                       <?php
@@ -384,13 +406,26 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $no=1;
+                      $total=0;
+                      foreach ($listbbbakhir as $l){
+                        $total=$total+$l->jumlahbiaya;
+                    ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++?></td>
+                      <td><?=$l->namabb?></td>
+                      <td><?=$l->jumlahbiaya?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>biayabb/hapusbbbakhir/<?=$l->idbiayabb?>/<?=$l->idproduksi?>/<?=$l->jumlahbiaya?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
+                    </tr>
+                    <?php
+                     }
+                    ?>
+                    <tr>
+                      <td colspan="2">Total Biaya</td>
+                      <td colspan="2"><?php echo 'Rp '.number_format($total)?></td>
                     </tr>
                   </tbody>
               </table>
@@ -398,6 +433,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- TKL Awal -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -414,6 +450,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Kegiatan</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idtkl" required="" name="idtkl" style="width: 100%;">
                       <option value="">--Pilih Kegiatan--</option>
                       <?php
@@ -448,6 +485,11 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php
+                      $no=1;
+                      $total=0;
+                      foreach($listbtklawal as $l){
+                    ?>
                     <tr>
                       <td></td>
                       <td></td>
@@ -456,12 +498,17 @@
                         <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                    <?php    
+                      }
+                    ?>
+                    
                   </tbody>
               </table>
             </div>
           </div>
           <!-- /.box -->
         </div>
+        <!-- TKL Akhir -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -478,6 +525,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Kegiatan</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idtkl2" required="" name="idtkl" style="width: 100%;">
                       <option value="">--Pilih Kegiatan--</option> 
                       <?php
@@ -526,6 +574,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- BOP AWAL -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -542,6 +591,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Biaya</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idop" required="" name="idtkl" style="width: 100%;">
                       <option value="">--Pilih BOP--</option> 
                       <?php
@@ -590,6 +640,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- BOP AKHIR -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -606,6 +657,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Biaya</label>
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
                     <select class="form-control" id="idbop2" required="" name="idbop" style="width: 100%;">
                       <option value="">--Pilih BOP--</option> 
                       <?php
@@ -654,6 +706,7 @@
           </div>
           <!-- /.box -->
         </div>
+        <!-- FINALE -->
         <div class="col-xs-6">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
@@ -670,7 +723,8 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Biaya Per Unit</label>
-                     <input type="number" class="form-control" id="biayaunit" readonly name="biayaunit" placeholder="Biaya Per Unit"> 
+                    <input type="hidden" class="form-control" value="<?=$list->idproduksi?>" readonly name="idproduksi" placeholder="ID Produksi">
+                    <input type="number" class="form-control" id="biayaunit" readonly name="biayaunit" placeholder="Biaya Per Unit"> 
                   </div>
                 </div>
                 <div class="col-md-12">

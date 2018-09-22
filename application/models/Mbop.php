@@ -20,10 +20,11 @@ class Mbop extends CI_Model {
     }
 
 
-    function list_bop(){
+    function list_bop($idproduksi){
          $this->db->select('*');
          $this->db->from('bop');
-        
+         $this->db->join('op', 'bop.idop = op.idop');
+         $this->db->where('idproduksi',$idproduksi);
          return $query=$this->db->get()->result();
     }
 
