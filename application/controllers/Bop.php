@@ -2,36 +2,36 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Biayatkl extends CI_Controller {
+class Bop extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model(array('Mbiayatkl','Mproduksi'));
+		$this->load->model(array('Mbop','Mproduksi'));
 	}
    
     public function index(){
        
     }
 
-    public function simpantklawal(){
+    public function simpanbopawal(){
         $idproduksi=$this->input->post('idproduksi',true);
-        $idtkl=$this->input->post('idtkl',true);
+        $idop=$this->input->post('idop',true);
         $jumlahbiaya=$this->input->post('jumlahbiaya',true);
-        $totalbiaya=$this->Mbiayatkl->totalbiaya($idproduksi)->row()->total;
+        $totalbiaya=$this->Mbop->totalbiaya($idproduksi)->row()->total;
         $totalbiaya=$totalbiaya+$jumlahbiaya;
         $data=array(
-          'btklprosesawal'=>$totalbiaya,
+          'bbopprosesawal'=>$totalbiaya,
         );
         $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
 
-        $datatkl=array(
+        $databop=array(
           'idproduksi'=>$idproduksi,
-          'idtkl'=>$idtkl,
-          'jumlahtkl'=>$jumlahbiaya,
-          'statustkl'=>'0',
+          'idop'=>$idop,
+          'jumlahbop'=>$jumlahbiaya,
+          'statusbop'=>'0',
         );
-        $simpantkl=$this->Mbiayatkl->simpan_biayatkl($datatkl);
-        if($editproduksi && $simpantkl){
+        $simpanbop=$this->Mbop->simpan_bop($databop);
+        if($editproduksi && $simpanbop){
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
@@ -46,17 +46,17 @@ class Biayatkl extends CI_Controller {
       }
     }
 
-    public function hapustklawal($idtkl,$idproduksi,$jumlah){
-    	$totalbiaya=$this->Mbiayatkl->totalbiaya($idproduksi)->row()->total;
+    public function hapusbopawal($idbop,$idproduksi,$jumlah){
+    	$totalbiaya=$this->Mbop->totalbiaya($idproduksi)->row()->total;
         $totalbiaya=$totalbiaya-$jumlah;  
 
         $data=array(
-          'btklprosesawal'=>$totalbiaya,
+          'bbopprosesawal'=>$totalbiaya,
         );
         $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
 
-        $hapustkl=$this->Mbiayatkl->hapus_biayatkl($idtkl);
-        if($editproduksi && $hapustkl){
+        $hapusbop=$this->Mbop->hapus_bop($idbop);
+        if($editproduksi && $hapusbop){
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
@@ -71,25 +71,25 @@ class Biayatkl extends CI_Controller {
         }
     }
 
-    public function simpantklakhir(){
+    public function simpanbopakhir(){
         $idproduksi=$this->input->post('idproduksi',true);
-        $idtkl=$this->input->post('idtkl',true);
+        $idop=$this->input->post('idop',true);
         $jumlahbiaya=$this->input->post('jumlahbiaya',true);
-        $totalbiaya=$this->Mbiayatkl->totalbiayaakhir($idproduksi)->row()->total;
+        $totalbiaya=$this->Mbop->totalbiayaakhir($idproduksi)->row()->total;
         $totalbiaya=$totalbiaya+$jumlahbiaya;
         $data=array(
-          'btkltambahan'=>$totalbiaya,
+          'bboptambahan'=>$totalbiaya,
         );
         $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
 
-        $datatkl=array(
+        $databop=array(
           'idproduksi'=>$idproduksi,
-          'idtkl'=>$idtkl,
-          'jumlahtkl'=>$jumlahbiaya,
-          'statustkl'=>'1',
+          'idop'=>$idop,
+          'jumlahbop'=>$jumlahbiaya,
+          'statusbop'=>'1',
         );
-        $simpantkl=$this->Mbiayatkl->simpan_biayatkl($datatkl);
-        if($editproduksi && $simpantkl){
+        $simpanbop=$this->Mbop->simpan_bop($databop);
+        if($editproduksi && $simpanbop){
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
@@ -104,17 +104,17 @@ class Biayatkl extends CI_Controller {
       }
     }
     
-    public function hapustklakhir($idtkl,$idproduksi,$jumlah){
-    	$totalbiaya=$this->Mbiayatkl->totalbiayaakhir($idproduksi)->row()->total;
+    public function hapusbopakhir($idbop,$idproduksi,$jumlah){
+    	$totalbiaya=$this->Mbop->totalbiayaakhir($idproduksi)->row()->total;
         $totalbiaya=$totalbiaya-$jumlah;  
 
         $data=array(
-          'btkltambahan'=>$totalbiaya,
+          'bboptambahan'=>$totalbiaya,
         );
         $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
 
-        $hapustkl=$this->Mbiayatkl->hapus_biayatkl($idtkl);
-        if($editproduksi && $hapustkl){
+        $hapusbop=$this->Mbop->hapus_bop($idbop);
+        if($editproduksi && $hapusbop){
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'

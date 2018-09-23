@@ -26,17 +26,24 @@
             
             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             <!-- /.box-header -->
-            <form action="<?=base_url()?>produksi/prosessimpan" role="form" method="post" class="form-horizontal">
+            <form action="<?=base_url()?>produksi/viewlaporanproduksi" role="form" method="post" class="form-horizontal">
               <div class="box-body">
                 <div class="col-md-6">
-                  <div class="col-md-12">
+                  <!-- <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">ID Produksi</label>
-                      <select class="form-control" id="idproduk" required="" name="idproduk" style="width: 100%;">
-                        <option value="">--Pilih Produksi--</option> 
+                      <label for="exampleInputEmail1">ID Produk</label>
+                      <select class="form-control" id="idproduk"  name="idproduk" style="width: 100%;">
+                        <option value="">--Pilih Produk--</option> 
+                        <?php
+                          foreach($produk as $p){
+                        ?>
+                        <option value="<?=$p->idproduk?>"><?=$p->namaproduk?></option> 
+                        <?php    
+                          }
+                        ?>
                       </select>
                     </div>  
-                  </div>
+                  </div> -->
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Bulan Produksi</label>
@@ -60,17 +67,14 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Tahun Produksi</label>
-                      <input type="number" class="form-control" id="tahun" required="" name="tahun" placeholder="Jumlah Rencana Produksi">
+                      <input type="number" class="form-control" required="" id="tahun" name="tahun" placeholder="Tahun Produksi">
                     </div>  
                   </div> 
                 </div>
               </div>
               <!-- /.box-body -->
-              <div class="box-footer">
-                  <button type="button" class="btn btn-warning" onclick="self.history.back()">
-                  <i class="fa fa-chevron-left"></i> Kembali
-                </button>
-                  <button type="submit" class="btn btn-success pull-right">Lihat Laporan</button>
+              <div class="box-footer">  
+                <button type="submit" class="btn btn-success pull-right">Lihat Laporan</button>
               </div>
             </form>
           </div>

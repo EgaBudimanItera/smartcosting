@@ -51,7 +51,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Smart Costing</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -263,7 +263,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?=base_url()?>assets/dist/img/admin.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs"><?=$this->session->userdata('userNama')?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -277,10 +277,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Ganti Password</a>
+                  <a href="<?=base_url()?>useraplikasi/formubahpassword" class="btn btn-default btn-flat">Ganti Password</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Log out</a>
+                  <a href="<?=base_url()?>useraplikasi/logout" class="btn btn-default btn-flat">Log out</a>
                 </div>
               </li>
             </ul>

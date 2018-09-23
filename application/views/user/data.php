@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Produk
+        Data User Aplikasi
       </h1>
       <?php $this->load->view('template/breadcrumb')?>
     </section>
@@ -14,7 +14,7 @@
         <div class="col-xs-12">
           <div class="box box-primary box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">List Produk</h3>
+              <h3 class="box-title">List User Aplikasi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -26,35 +26,38 @@
 
             <div class="box-body">
               <div class="widget-body">
-                <a href="<?=base_url()?>produk/formtambah" class="btn btn-danger">Tambah Data Produk</a>
+                <a href="<?=base_url()?>useraplikasi/formtambah" class="btn btn-danger">Tambah Data User Aplikasi</a>
               </div>  
               <br>
               <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
             </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table  class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Nama Produk</th>
-                      <th>Satuan</th>
-                      <th>Jumlah</th>
+                      <th>Nama User</th>
+                      <th>Hak Akses</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    
+                    <?php
+                     $no=1;
+                     foreach($list as $l){
+                    ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->userNama?></td>
+                      <td><?=$l->userHakakses?></td>
                       <td>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="#"><i class="fa fa-pencil"></i></a>
-                       
-                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="#" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>useraplikasi/hapususer/<?=$l->userId?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
+                    <?php
+                     }
+                    ?>
+                    
                   </tbody>
                 </table>
               </div>

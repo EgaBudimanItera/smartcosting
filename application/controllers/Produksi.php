@@ -62,7 +62,8 @@ class produksi extends CI_Controller {
             'listbbbakhir'=>$this->Mbiayabb->list_biayabbakhir($idproduksi),
             'listbtklawal'=>$this->Mbiayatkl->list_biayatklawal($idproduksi),
             'listbtklakhir'=>$this->Mbiayatkl->list_biayatklakhir($idproduksi),
-            'listbop'=>$this->Mbop->list_bop($idproduksi),
+            'listbbopawal'=>$this->Mbop->list_bopawal($idproduksi),
+            'listbbopakhir'=>$this->Mbop->list_bopakhir($idproduksi),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -79,7 +80,7 @@ class produksi extends CI_Controller {
                 'Beranda' => base_url() . 'berandaadmin',
                 'Laporan Produksi' => base_url() . 'produksi/formlaporanproduksi',
             ),
-            
+            'produk'=>$this->Mproduk->list_produk(),
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
@@ -88,6 +89,11 @@ class produksi extends CI_Controller {
     }
 
     public function viewlaporanproduksi(){
+        $kriteria=array(
+            
+            'bulan'=>$this->input->post('bulan',true),
+            'tahun'=>$this->input->post('tahun',true),
+        );
         $data = array(
             'page' => 'produksi/viewlaporanproduksi',
             'link' => 'laporanproduksi',
@@ -97,12 +103,34 @@ class produksi extends CI_Controller {
                 'Laporan Produksi' => base_url() . 'produksi/formlaporanproduksi',
                 'View Laporan Produksi' => base_url() . 'produksi/viewlaporanproduksi',
             ),
-            
+            'listproduksi'=>$this->Mproduksi->ambil_produksi3($kriteria)->result(),
+            'kriteria'=>$kriteria,
         );
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
         $this->load->view('template/content');
         $this->load->view('template/footer');
+    }
+
+    public function cetaklaporanproduksi($bulan,$tahun){
+       $kriteria=array(
+            'bulan'=>$bulan,
+            'tahun'=>$tahun,
+        );
+       $data=array(
+         'list'=>$this->Mproduksi->ambil_produksi3($kriteria)->result(),
+         'kriteria'=>$kriteria,
+       );
+       $this->load->view('produksi/laporanproduksi',$data);
+    }
+
+    public function kartuproduksi($idproduksi){
+        $data=array(
+           'list'=>$this->Mproduksi->ambil_produksi($idproduksi)->row(),
+           'hasilmodel'=>$this->Mproduksi->hitungbiayaunit($idproduksi),
+        );
+        $this->load->view('produksi/kartuproduksi',$data);
+
     }
 
     public function prosessimpan(){
@@ -165,6 +193,52 @@ class produksi extends CI_Controller {
       }
     }
 
+    public function hitungdanstatus(){
+       $idproduksi=$this->input->post('idproduksi',true);
+       $kriteria=$this->Mproduksi->ambil_produksi2($idproduksi)->row();
+       $masukan=$kriteria->jumlprosesawal+$kriteria->jumlproduksi;
+       $keluaran=$kriteria->jumlselesai+$kriteria->jumlprosesakhir;
+       if($masukan>0 && $keluaran>0){
+         if($masukan==$keluaran){
+           $hasilmodel=$this->Mproduksi->hitungbiayaunit($idproduksi);  
+           $biayaperunit=$hasilmodel['jumlahbiayaperunit'];
+           $statusproduksi=$this->input->post('statusproduksi',true);
+           $data=array(
+             'biayaunit'=>$biayaperunit,
+             'statusproduksi'=>$statusproduksi,
+           );
+
+            $editproduksi=$this->Mproduksi->ubah_produksi($idproduksi,$data);
+            if($editproduksi){
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+                );
+                redirect(base_url().'produksi/formedit/'.$idproduksi);
+            }else{
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+                );
+                redirect(base_url().'produksi/formedit/'.$idproduksi);
+            }
+         }else{
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Data Jumlah Masukan dan Keluar Tidak Sama !</div>'
+            );
+            redirect(base_url().'produksi/formedit/'.$idproduksi);
+         }
+       }else{
+         $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Danger!</strong> Data Masukan dan Keluaran Produk 0 !</div>'
+         );
+         redirect(base_url().'produksi/formedit/'.$idproduksi);
+       }
+       
+    }
+
     public function proseseditpersenawal(){
         $idproduksi=$this->input->post('idproduksi',true);
         $pbbprosesawal=$this->input->post('pbbprosesawal',true);
@@ -182,15 +256,15 @@ class produksi extends CI_Controller {
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
-        );
+            );
             redirect(base_url().'produksi/formedit/'.$idproduksi);
         }else{
             $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
-        );
+            );
             redirect(base_url().'produksi/formedit/'.$idproduksi);
-      }
+        }
     }
 
     public function proseseditpersenakhir(){

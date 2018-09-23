@@ -33,12 +33,12 @@ class Mbiayatkl extends CI_Model {
     }
 
     function totalbiaya($idproduksi){
-        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='0'";
+        $query="SELECT coalesce((sum(jumlahtkl)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='0'";
         return $this->db->query($query);
     }
 
     function totalbiayaakhir($idproduksi){
-        $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='1'";
+        $query="SELECT coalesce((sum(jumlahtkl)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='1'";
         return $this->db->query($query);
     }
 

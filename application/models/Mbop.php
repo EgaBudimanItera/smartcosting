@@ -8,31 +8,37 @@ class Mbop extends CI_Model {
         return true;
     }
 
-    function ubah_bop($param_kode, $kode, $data){       
-        $this->db->where($param_kode, $kode);
-        $this->db->update('bop', $data); 
-        return true;
-    }
-
-    function hapus_bop($param_kode, $kode){
-        $this->db->delete('bop', array($param_kode => $kode)); 
+    
+    function hapus_bop($kode){
+        $this->db->delete('bop', array('idbop' => $kode)); 
         return true;
     }
 
 
-    function list_bop($idproduksi){
+    function list_bopawal($idproduksi){
          $this->db->select('*');
          $this->db->from('bop');
          $this->db->join('op', 'bop.idop = op.idop');
-         $this->db->where('idproduksi',$idproduksi);
+         $this->db->where(array('idproduksi'=>$idproduksi,'statusbop'=>'0'));
          return $query=$this->db->get()->result();
     }
 
-    function ambil_bop($param_kode, $kode){
-        $this->db->select('*');
-        $this->db->from('bop');
-        $this->db->where($param_kode,$kode);
-        return $query=$this->db->get();
+    function list_bopakhir($idproduksi){
+         $this->db->select('*');
+         $this->db->from('bop');
+         $this->db->join('op', 'bop.idop = op.idop');
+         $this->db->where(array('idproduksi'=>$idproduksi,'statusbop'=>'1'));
+         return $query=$this->db->get()->result();
+    }
+
+    function totalbiaya($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbop)),0)as total FROM bop where idproduksi='$idproduksi' and statusbop='0'";
+        return $this->db->query($query);
+    }
+
+    function totalbiayaakhir($idproduksi){
+        $query="SELECT coalesce((sum(jumlahbop)),0)as total FROM bop where idproduksi='$idproduksi' and statusbop='1'";
+        return $this->db->query($query);
     }
 
     function kode_bop(){

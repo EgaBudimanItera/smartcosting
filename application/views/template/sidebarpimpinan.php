@@ -1,6 +1,4 @@
-<?php
-  $userHakakses=$this->session->userdata('userHakakses');
-?>
+
 <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -11,7 +9,7 @@
           <img src="<?=base_url()?>assets/dist/img/admin.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?=$this->session->userdata('userNama')?></p>
+          <p>Admin</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -38,15 +36,7 @@
             <li class="<?php if($link=='bahanbaku'){echo'active';}?>"><a href="<?=base_url()?>bahanbaku"><i class="fa fa-server"></i> Bahan Baku</a></li>
             <li class="<?php if($link=='tenagakerjalangsung'){echo'active';}?>"><a href="<?=base_url()?>tenagakerjalangsung"><i class="fa fa-users"></i> Tenaga Kerja Langsung</a></li>
             <li class="<?php if($link=='op'){echo'active';}?>"><a href="<?=base_url()?>op"><i class="fa fa-bank"></i> Overhead Pabrik</a></li>
-
-            <?php
-             if($userHakakses=="Pimpinan"){
-            ?>
-            <li class="<?php if($link=='user'){echo'active';}?>"><a href="<?=base_url()?>useraplikasi/datauser"><i class="fa fa-users"></i> Users</a></li>
-            <?php
-             }
-            ?>
-            
+            <li class="<?php if($link=='user'){echo'active';}?>"><a href="<?=base_url()?>user"><i class="fa fa-users"></i> Users</a></li>
           </ul>
         </li>
 
