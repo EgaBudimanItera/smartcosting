@@ -106,10 +106,20 @@ class produksi extends CI_Controller {
             'listproduksi'=>$this->Mproduksi->ambil_produksi3($kriteria)->result(),
             'kriteria'=>$kriteria,
         );
+        
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebaradmin');
         $this->load->view('template/content');
         $this->load->view('template/footer');
+    }
+
+    public function kertaskerja($idproduksi){
+        $data=array(
+         'produksi'=>$this->Mproduksi->ambil_produksi2($idproduksi)->row(),
+         
+         'kriteria'=>$kriteria,
+       );
+       $this->load->view('produksi/kertaskerja',$data);
     }
 
     public function cetaklaporanproduksi($bulan,$tahun){

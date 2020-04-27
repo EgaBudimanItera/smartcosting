@@ -41,6 +41,7 @@
                       <th>Jumlah Selesai</th>
                       <th>Harga Per Unit</th>
                       <th>Subtotal</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -59,6 +60,7 @@
                       <td align="right"><?php echo number_format($l->jumlselesai)?></td>
                       <td align="right"><?php echo number_format($l->biayaunit,2,',','')?></td>
                       <td align="right"><?php echo number_format($l->biayaunit*$l->jumlselesai)?></td>
+                      <td> <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-danger" href="<?=base_url()?>produksi/kartukerja/<?=$l->idproduksi?>" target="_blank"><i class="fa fa-print"></i> Kertas Kerja</a></td>
                     </tr>
                     
                     <?php

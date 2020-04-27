@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v7.14 
-MySQL - 5.6.25 : Database - smartcosting
+MySQL - 5.6.21 : Database - smartcosting
 *********************************************************************
 */
 
@@ -27,6 +27,8 @@ CREATE TABLE `bahanbaku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `bahanbaku` */
+
+insert  into `bahanbaku`(`idbb`,`namabb`,`satuan`) values ('R00001','bHan 1','Unit');
 
 /*Table structure for table `biayabb` */
 
@@ -98,6 +100,8 @@ CREATE TABLE `op` (
 
 /*Data for the table `op` */
 
+insert  into `op`(`idop`,`namaop`,`keterangan`) values ('O00001','BOP 1','0'),('O00002','BOP 2','1');
+
 /*Table structure for table `produk` */
 
 DROP TABLE IF EXISTS `produk`;
@@ -111,6 +115,8 @@ CREATE TABLE `produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `produk` */
+
+insert  into `produk`(`idproduk`,`namaproduk`,`satuan`,`jumlah`) values ('P0001','Produk 1','Unit',NULL);
 
 /*Table structure for table `produksi` */
 
@@ -141,12 +147,16 @@ CREATE TABLE `produksi` (
   `bboptambahan` double DEFAULT NULL,
   `biayaunit` double DEFAULT NULL,
   `statusproduksi` enum('0','1','2') DEFAULT '0' COMMENT '0=mulai produksi,1=selesai,2=transfer kebulan depan',
+  `jumlrencana` double DEFAULT '0',
+  `jumlprosesawal` double DEFAULT '0',
   PRIMARY KEY (`idproduksi`),
   KEY `FK_produksi` (`idproduk`),
   CONSTRAINT `FK_produksi` FOREIGN KEY (`idproduk`) REFERENCES `produk` (`idproduk`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `produksi` */
+
+insert  into `produksi`(`idproduksi`,`tglmulai`,`tglakhir`,`bulan`,`tahun`,`idproduk`,`jumlhprosesawal`,`jumlproduksi`,`jumlselesai`,`jumlprosesakhir`,`pbbprosesawal`,`ptklprosesawal`,`pbopprosesawal`,`pbbprosesakhir`,`ptklprosesakhir`,`pbopprosesakhir`,`bbbprosesawal`,`btklprosesawal`,`bbopprosesawal`,`bbbtambahan`,`btkltambahan`,`bboptambahan`,`biayaunit`,`statusproduksi`,`jumlrencana`,`jumlprosesawal`) values ('P00001','2020-04-09',NULL,'04','2020','P0001',NULL,0,0,0,0,0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0',3000,0);
 
 /*Table structure for table `tenagakerjalangsung` */
 
@@ -160,6 +170,8 @@ CREATE TABLE `tenagakerjalangsung` (
 
 /*Data for the table `tenagakerjalangsung` */
 
+insert  into `tenagakerjalangsung`(`idtkl`,`namatkl`) values ('T00001','TKL 1');
+
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -170,9 +182,11 @@ CREATE TABLE `user` (
   `userPassword` varchar(150) DEFAULT NULL,
   `userHakakses` enum('Admin','Pimpinan','Teller') DEFAULT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
+
+insert  into `user`(`userId`,`userNama`,`userPassword`,`userHakakses`) values (1,'admin','admin','Admin');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
