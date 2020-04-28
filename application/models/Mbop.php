@@ -31,6 +31,14 @@ class Mbop extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
+    function list_bopall($idproduksi){
+         $this->db->select('*');
+         $this->db->from('bop');
+         $this->db->join('op', 'bop.idop = op.idop');
+         $this->db->where(array('idproduksi'=>$idproduksi));
+         return $query=$this->db->get()->result();
+    }
+
     function totalbiaya($idproduksi){
         $query="SELECT coalesce((sum(jumlahbop)),0)as total FROM bop where idproduksi='$idproduksi' and statusbop='0'";
         return $this->db->query($query);

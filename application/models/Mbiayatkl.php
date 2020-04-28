@@ -32,6 +32,14 @@ class Mbiayatkl extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
+    function list_biayatklall($idproduksi){
+         $this->db->select('*');
+         $this->db->from('biayatkl');
+         $this->db->join('tenagakerjalangsung', 'biayatkl.idtkl = tenagakerjalangsung.idtkl');
+         $this->db->where(array('idproduksi'=>$idproduksi));
+         return $query=$this->db->get()->result();
+    }
+
     function totalbiaya($idproduksi){
         $query="SELECT coalesce((sum(jumlahtkl)),0)as total FROM biayatkl where idproduksi='$idproduksi' and statustkl='0'";
         return $this->db->query($query);

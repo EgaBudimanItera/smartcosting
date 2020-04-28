@@ -30,6 +30,14 @@ class Mbiayabb extends CI_Model {
          return $query=$this->db->get()->result();
     }
 
+    function list_biayabball($idproduksi){
+        $this->db->select('*');
+        $this->db->from('biayabb');
+        $this->db->join('bahanbaku', 'biayabb.idbb = bahanbaku.idbb');
+        $this->db->where(array('idproduksi'=>$idproduksi));
+        return $query=$this->db->get()->result();
+    }
+
     function totalbiaya($idproduksi){
         $query="SELECT coalesce((sum(jumlahbiaya)),0)as total FROM biayabb where idproduksi='$idproduksi' and statusbb='0'";
         return $this->db->query($query);

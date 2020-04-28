@@ -116,9 +116,16 @@ class produksi extends CI_Controller {
     public function kertaskerja($idproduksi){
         $data=array(
          'produksi'=>$this->Mproduksi->ambil_produksi2($idproduksi)->row(),
+         'bb'=>$this->Mbiayabb->list_biayabball($idproduksi),
+        
+         'btk'=>$this->Mbiayatkl->list_biayatklall($idproduksi),
          
-         'kriteria'=>$kriteria,
+         'bop'=>$this->Mbop->list_bopall($idproduksi),
+        
+         
        );
+
+        
        $this->load->view('produksi/kertaskerja',$data);
     }
 
