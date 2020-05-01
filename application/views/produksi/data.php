@@ -66,7 +66,7 @@
                       <td><?=$ket?></td>
                       <td>
                         <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-warning" href="<?=base_url()?>produksi/formedit/<?=$l->idproduksi?>"><i class="fa fa-pencil"></i></a>
-                        <a data-toggle="tooltip" data-placement="bottom" title="Print Kartu Produksi" class="btn btn-success" href="<?=base_url()?>produksi/kartuproduksi/<?=$l->idproduksi?>" target="_blank" ><i class="fa fa-print"></i></a>
+                        <!-- <a data-toggle="tooltip" data-placement="bottom" title="Print Kartu Produksi" class="btn btn-success" href="<?=base_url()?>produksi/kartuproduksi/<?=$l->idproduksi?>" target="_blank" ><i class="fa fa-print"></i></a> -->
                         <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-danger" href="<?=base_url()?>produksi/proseshapus/<?=$l->idproduksi?>" onclick="return confirm('yakin akan menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>

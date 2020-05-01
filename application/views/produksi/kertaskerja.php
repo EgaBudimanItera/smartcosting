@@ -195,7 +195,7 @@ td.garis {
 
     <tr>
        <td colspan="6"><strong>Harga Satuan Produk</strong></td>
-       <td><?=number_format(($totalbb+$totaltkl+$totalop)/$produksi->jumlproduksi,2)?></td>
+       <td><?php if($produksi->jumlproduksi!=0){number_format(($totalbb+$totaltkl+$totalop)/$produksi->jumlproduksi,2);}else{0;}?></td>
     </tr>
     <tr>
       
